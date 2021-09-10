@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  align-items: center;
+  justify-content: center; 
+}
+
+.master-container {
+  /* width: 90%; */
+  justify-content: center;
+  /* position:relative; */
+  /* min-height:1px; */
+  padding-right: 45px;
+  padding-left:45px
+}
+
+/* MY SHITE */
+nav {
+  background-color: #2d4a58;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.play-button {
+  background-color: red;
+  width: 8vw;
+  border-radius: 0.4rem;
+}
+
+.best_video {
+  border: black solid 3px;
+  color: black; 
+  margin-bottom: 1.5rem;
+}
+
+
+
+/* Carousel */
+.carousel-container {
+  width: 100%;
+  height: 20vw;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.carousel-content {
+  height: 100px;
+  width: auto;
+  /* background-color: aqua; */
+  overflow: scroll;
+  white-space: nowrap;
+  display: inline-block;
+  text-align: center;
+  padding-bottom: 10px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.carousel-item {
+  height: 100%;
+  border: black solid 1px; 
+  width: 140px;
+  margin-right: 1rem;
+  /* padding: 1.2rem; */
+}
+
+.carousel-button {
+  color : black;
+  font-weight: bold;
+  width: 45px ;
+  text-align: center ;
+  z-index: 3;
+  font-size: 30px;
+
+}
+
+.left {
+  position: absolute;
+  color: green;
+  left: 50px; 
+}
+
+.right {
+  position: absolute;
+  color: green;
+  right: 50px; 
+}
