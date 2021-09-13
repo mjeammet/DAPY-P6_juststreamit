@@ -30,16 +30,16 @@
         <div class="master-container">        
             <!-- Vidéo la mieux notée -->
             <div class="best_video">
-                <div style="display: inline-block">
-                    <h2>Titre de la vidéo</h2>
+                <div>
+                    <h3>Titre de la vidéo</h3>
                     <button class="play-button">Play</button>
                 </div>
-                <div style="display: inline-block">
+                <div>
                     <img src="https://s2.qwant.com/thumbr/474x266/f/f/5def1c2e081de83ec90bf06719398bb0068cadb67d3d3b2cb46fe9038d4edd/th.jpg?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.vRYK2YdcCnl8SetV-RvapwHaEK%26pid%3DApi&q=0&b=1&p=0&a=0" alt="">
                 </div>
             </div>
 
-            <div style="border: dashed black 1px;">
+            <div id="best_movies" class="carousel_section">
                 <h2>Films les mieux notés</h2>
                 <div class="carousel">
         
@@ -51,8 +51,47 @@
         
                 </div>
             </div>            
+
+            <div id="cat1" class="carousel_section">
+                <h2>Catégorie 1</h2>
+                <div class="carousel">
+        
+                    <a class="switchLeft sliderButton" onclick="sliderScrollLeft();"><</a>
+                    <div class="carouselBox">
+                        <!-- Movies selection -->
+                    </div>
+                    <a class="switchRight sliderButton" onclick="sliderScrollRight();">></a>
+        
+                </div>
+            </div>
             
-            <hr>
+            <div id="cat2" class="carousel_section">
+                <h2>Catégorie 1</h2>
+                <div class="carousel">
+        
+                    <a class="switchLeft sliderButton" onclick="sliderScrollLeft();"><</a>
+                    <div class="carouselBox">
+                        <!-- Movies selection -->
+                    </div>
+                    <a class="switchRight sliderButton" onclick="sliderScrollRight();">></a>
+        
+                </div>
+            </div>
+
+            <div id="cat3" class="carousel_section">
+                <h2>Catégorie 1</h2>
+                <div class="carousel">
+        
+                    <a class="switchLeft sliderButton" onclick="sliderScrollLeft();"><</a>
+                    <div class="carouselBox">
+                        <!-- Movies selection -->
+                    </div>
+                    <a class="switchRight sliderButton" onclick="sliderScrollRight();">></a>
+        
+                </div>
+            </div>
+
+        
         </div>
     
         <script src="http://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.js"></script>

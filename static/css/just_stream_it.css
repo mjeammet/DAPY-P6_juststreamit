@@ -12,14 +12,26 @@ body {
   flex-wrap: wrap;
 }
 
+h2 {
+  text-align: center;
+}
+
+a {
+  color: white;
+  margin: 10px;
+  padding: 10px;
+  text-decoration: none;
+  font-weight: lighter;
+}
+
 .master-container{ 
-  width: 70%;
-  justify-content: center;
-  align-items: center; 
-  position:relative;
-  min-height:1px;
-  padding-right: 45px;
-  padding-left:45px
+  width: 73%;
+  /* justify-content: center; */
+  /* align-items: center;  */
+  /* position: relative; */
+  /* min-height:1px; */
+  /* padding-right: 45px; */
+  /* padding-left:45px */
 }
 
 /* MY SHITE */
@@ -46,15 +58,25 @@ nav {
   border: black solid 4px;
   color: black; 
   margin-bottom: 1.5rem;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.carousel_section {
+  justify-content: center;
+  align-items: center;
+  display: block;
 }
 
 /* Carousel */
 .carousel {
   height: 250px;
-  width: 80%;
+  width: 100%;
   position: relative;
   display: inline-flex;
-  /* dunno what i'm doing */
+  
   justify-content: center;
   align-items: center;
 }
@@ -79,7 +101,7 @@ nav {
   font-weight: bold;
   height: 100%;
   width: 45px ;
-  line-height: 250px;  
+  line-height: 250px;
   /* background-color: lightgreen; */
   font-size: 30px;
   text-align: center;
@@ -98,9 +120,8 @@ nav {
 }
 
 .carouselBox img {
-  min-width: 147px;
-  max-width: 147px;
-  height: 150px; 
+  height: 150px;
+  width: 147px;  
   border: solid black 3px;
   background-size: cover;
   background-color: #2d4a58;
