@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="./just_stream_it.css">
+        <link rel="stylesheet" href="./static/css/just_stream_it.css">
         
         <script></script>
         <script>
@@ -15,7 +15,7 @@
         <!-- {% include './include/navbar.html' %}  -->
         <nav>
             <a class="navbar-brand" href="#" style="width:40vw;">
-                <img src="./jsi_logo.png" alt="" width="150vw">
+                <img src="./static/img/jsi_logo.png" alt="" width="150vw">
             </a>
             <div style="display: flex;">
                 <a href="#">
@@ -41,30 +41,21 @@
 
             <div style="border: dashed black 1px;">
                 <h2>Films les mieux notés</h2>
-                <div class="carousel-container">
+                <div class="carousel">
         
-                    <div class="carousel-content">
-                        <img class="carousel-item" src="./contact.jpg" alt="">
-                        <img class="carousel-item" src="./contact.jpg" alt="">
-                        <img class="carousel-item" src="./contact.jpg" alt="">
-                        <img class="carousel-item" src="./Enemy.jpg" alt="">
-                        <img class="carousel-item" src="./Enemy.jpg" alt="">
-                        <img class="carousel-item" src="./Enemy.jpg" alt="">
-                        <img class="carousel-item" src="./jsi_logo.png" alt="">
-                        <img class="carousel-item" src="./jsi_logo.png" alt="">
-                        <img class="carousel-item" src="./jsi_logo.png" alt="">
+                    <a class="switchLeft sliderButton" onclick="sliderScrollLeft();"><</a>
+                    <div class="carouselBox">
+                        <!-- Movies selection -->
                     </div>
-        
-                    <a class="carousel-button left"><</a>
-                    <a class="carousel-button right">></a>
+                    <a class="switchRight sliderButton" onclick="sliderScrollRight();">></a>
         
                 </div>
-            </div>
-            
+            </div>            
             
             <hr>
         </div>
     
-        <script src = "just_stream_it.js" type = "text/javascript"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.js"></script>
+        <script src = "./static/js/just_stream_it.js" type = "text/javascript"></script>
     </body>
 </html>

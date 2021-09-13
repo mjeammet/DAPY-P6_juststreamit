@@ -2,42 +2,61 @@ function test(){
   alert("The javascript file has been correctly loaded.");
 }
 
-const sliders = document.querySelector(".carousel-content")
-var scrollPerClick;
+const sliders = document.querySelector(".carouselBox");
+// alert(sliders.innerHTML)
+var scrollPerClick = 400;
 var ImagePadding = 20;
 
 showMovieData();
 
-// let slideIndex = 1;
-// showSlides(slideIndex);
+// SCROLLING PART 
+var scrollAmount = 0;
 
-// // Next/previous controls
-// function changeSlide(n) {
-//     showSlides(slideIndex += n);
-// }
+function sliderScrollLeft() {
+  // alert(scrollPerClick, " to the left");
+  // sliders.scrollLeft -= 400;
+  sliders.scrollTo({
+    top: 0, 
+    left: (scrollAmount -= scrollPerClick),
+    behavior: "smooth"
+  });
 
-// // Indicator controls
-// function currentSlide(n) {
-//     showSlides(slideIndex = n);
-// }
+  // if (scrollAmount <  0) {
+  //   scrollAmount = 0;
+  // }
+}
 
-// // Change image every 3 seconds
-// setInterval("showSlides(++slideIndex)", 3000);
+function sliderScrollRight() {
+  // alert("Going " + scrollPerClick + " to the right.");
+  sliders.scrollTo({
+    top: 0,
+    left: (scrollAmount += scrollPerClick),
+    behavior: "smooth"
+  });
+  // if (scrollAmount <= sliders.scrollWidth - sliders.clientWidth){
+  //   sliders.scrollTo({
+  //     top: 0,
+  //     left: (scrollAmount += scrollPerClick),
+  //     behaviour: "smooth"
+  //   });
+  // }
+}
 
-// function showSlides(n) {
-//     let i, slides, dots;
-//     slides = document.getElementsByClassName("carousel-item");
-//     dots = document.getElementsByClassName("indicator");
-//     if (n > slides.length) {
-//       slideIndex = 1;
-//     }
-//     if (n < 1) {slideIndex = slides.length;}
-//     for (i = 0; i < slides.length; i++) {
-//         slides[i].style.display = "none";
-//     }
-//     for (i = 0; i < dots.length; i++) {
-//         dots[i].className = dots[i].className.replace(" active", "");
-//     }
-//     slides[slideIndex-1].style.display = "block";
-//     dots[slideIndex-1].className += " active";
-// }
+function showMovieData(){
+  // Loading elements
+  // Here insert API elements
+  pics = ["test_images/contact.jpg", "test_images/Enemy.jpg", "img/jsi_logo.png"]
+  let index = 0;
+
+  for (pic_index in pics){
+    for (let re = 0; re < 2; re++){
+      index ++;
+      sliders.insertAdjacentHTML(
+        "beforeend",
+        `<img class="img-${index}" slider-img" src="./static/${pics[pic_index]}" />`
+      )
+    }  
+  }
+
+  scrollPerClick = document.querySelector(".img-1").clientWidth + ImagePadding;
+}
