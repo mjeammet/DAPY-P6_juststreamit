@@ -34,20 +34,18 @@
                     <h3>Titre de la vidéo</h3>
                     <button class="play-button">Play</button>
                 </div>
-                <div>
-                    <img src="https://s2.qwant.com/thumbr/474x266/f/f/5def1c2e081de83ec90bf06719398bb0068cadb67d3d3b2cb46fe9038d4edd/th.jpg?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.vRYK2YdcCnl8SetV-RvapwHaEK%26pid%3DApi&q=0&b=1&p=0&a=0" alt="">
-                </div>
+                <img class="best_movie_img" src="https://s2.qwant.com/thumbr/474x266/f/f/5def1c2e081de83ec90bf06719398bb0068cadb67d3d3b2cb46fe9038d4edd/th.jpg?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.vRYK2YdcCnl8SetV-RvapwHaEK%26pid%3DApi&q=0&b=1&p=0&a=0" alt="">
             </div>
 
             <div id="best_movies" class="carousel_section">
                 <h2>Films les mieux notés</h2>
                 <div class="carousel">
         
-                    <a class="switchLeft sliderButton" onclick="sliderScrollLeft();"><</a>
+                    <a class="switchLeft sliderButton" onclick="sliderScrollLeft(this);"><</a>
                     <div class="carouselBox">
                         <!-- Movies selection -->
                     </div>
-                    <a class="switchRight sliderButton" onclick="sliderScrollRight();">></a>
+                    <a class="switchRight sliderButton" onclick="sliderScrollRight(this);">></a>
         
                 </div>
             </div>            
@@ -56,11 +54,11 @@
                 <h2>Meilleurs films cubains</h2>
                 <div class="carousel">
         
-                    <a class="switchLeft sliderButton" onclick="sliderScrollLeft();"><</a>
+                    <a class="switchLeft sliderButton" onclick="sliderScrollLeft(this);"><</a>
                     <div class="carouselBox">
                         <!-- Movies selection -->
                     </div>
-                    <a class="switchRight sliderButton" onclick="sliderScrollRight();">></a>
+                    <a class="switchRight sliderButton" onclick="sliderScrollRight(this);">></a>
         
                 </div>
             </div>
@@ -69,11 +67,11 @@
                 <h2>Les plus gros hits de science fiction</h2>
                 <div class="carousel">
         
-                    <a class="switchLeft sliderButton" onclick="sliderScrollLeft();"><</a>
+                    <a class="switchLeft sliderButton" onclick="sliderScrollLeft(this);"><</a>
                     <div class="carouselBox">
                         <!-- Movies selection -->
                     </div>
-                    <a class="switchRight sliderButton" onclick="sliderScrollRight();">></a>
+                    <a class="switchRight sliderButton" onclick="sliderScrollRight(this);">></a>
         
                 </div>
             </div>
@@ -82,19 +80,27 @@
                 <h2>Catégorie 3</h2>
                 <div class="carousel">
         
-                    <a class="switchLeft sliderButton" onclick="sliderScrollLeft();"><</a>
+                    <a class="switchLeft sliderButton" onclick="sliderScrollLeft(this);"><</a>
                     <div class="carouselBox">
                         <!-- Movies selection -->
                     </div>
-                    <a class="switchRight sliderButton" onclick="sliderScrollRight();">></a>
+                    <a class="switchRight sliderButton" onclick="sliderScrollRight(this);">></a>
         
                 </div>
             </div>
+            
+            <!-- <button id="myBtn">Open Modal</button> -->
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
 
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <!-- There goes movies info -->
+                </div>
+            </div>
         
         </div>
     
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.js"></script>
         <script src = "./static/js/just_stream_it.js" type = "text/javascript"></script>
     </body>
 </html>
