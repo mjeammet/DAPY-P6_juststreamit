@@ -4,66 +4,68 @@
 var scrollPerClick = 172;
 var ImagePadding = 20;
 
-get_data();
-// console.log(data);
-// showMovieData();
-
-// CAROUSEL-RELATED FUNCTIONS 
-var scrollAmount = 0; // make a scrollAmount for each carousle
-
-function sliderScrollLeft(element) {
-  carousel = element.nextElementSibling;
-  carousel.scrollTo({
-    top: 0, 
-    left: (scrollAmount -= scrollPerClick),
-    behavior: "smooth"
-  });
-
-  if (scrollAmount <  0) {
-    scrollAmount = 0;
-  }
+const api_url = "http://localhost:8000/api/v1/titles/";
+const url_dico = {
+  'best_movies':  api_url + "?sort_by=-imdb_score",
+  'cat1':  api_url + "?sort_by=-imdb_score&country=Cuba",
+  "cat2":  api_url + "?genre=sci-fi&sort_by=-votes"
+};
+// get_best_movie();
+for (carousel_id of Object.keys(url_dico)){
+  fillCarousel(carousel_id, url_dico[carousel_id]);
 }
 
-function sliderScrollRight(element) {
-  carousel = element.previousElementSibling;
-  if (scrollAmount <= carousel.scrollWidth - carousel.clientWidth){
-    // alert(scrollAmount + " ->" + (scrollAmount + scrollPerClick) + " sur " + sliders.scrollWidth);
-    carousel.scrollTo({
-      top: 0,
-      left: (scrollAmount += scrollPerClick),
-      behavior: "smooth"
-    });
-  }
+// CAROUSEL-RELATED FUNCTIONS 
+function sliderScrollRight(element){
+  var carousel = element.parentNode;  
+  var carousel_id = carousel.id;
+  var url = url_dico[carousel_id]
+
+  update_dico(carousel_id, url, 'next');
+  fillCarousel(carousel_id, url_dico[carousel_id]);
+}
+
+function sliderScrollLeft(element){
+  var carousel = element.parentNode;  
+  var carousel_id = carousel.id;
+  var url = url_dico[carousel_id]
+
+  update_dico(carousel_id, url, 'previous');
+  fillCarousel(carousel_id, url_dico[carousel_id]);
+}
+
+// connecting to the api
+async function get_json_from_api(url) {
+  let api_data = await fetch(url)
+  let api_json = await api_data.json();
+  return api_json;
 }
 
 // DATA RELATED PART
-// takes carousel box element and fills it with appropriate 
-async function get_data() {
-  ids = ["best_movies", "cat1", "cat2"];
-
-  api_url = "http://localhost:8000/api/v1/titles/" 
-  uri = [api_url + "?sort_by=-imdb_score", 
-        api_url + "?sort_by=-imdb_score&country=Cuba",
-        api_url + "?genre=sci-fi&sort_by=-votes"];
-
-  for (index in ids){
-    api_url = uri[index];
-    // console.log(uri[index])
-    var test = await fetch(api_url);
-    var data = await test.json();
-    var api_data = data.results;
-  
-    fillCarousel(ids[index], api_data);
-  }
+async function update_dico(carousel_id, url, movement) {
+  let my_json = await get_json_from_api(url);
+  url_dico[carousel_id] = my_json[movement];
 }
 
-function fillCarousel(element_id, list_of_movies){
-  element = document.getElementById(`${element_id}`).querySelector('.carousel').querySelector(".carouselBox")
+// if (category_name == 'best_movies'){
+  //       featured_img = document.getElementsByClassName('best_movie_img');
+  //       console.log(featured_img);
+  //       featured_img.src = api_data[0].image_url;
+  //       console.log(api_data[0].image_url);
+  //     }
+
+
+// takes carousel box element and fills it with appropriate movie
+
+async function fillCarousel(element_id, query_url){
+  let json = await get_json_from_api(query_url);
+  list_of_movies = json.results
+  element = document.getElementById(`${element_id}`).querySelector(".carouselBox")
+  element.innerHTML = ""
 
   let index = 0;
 
   for (pic_index in list_of_movies){
-    for (let i = 0; i < 2; i++){
       index ++;
       var cover_url = list_of_movies[pic_index].image_url;
       var movie_id = list_of_movies[pic_index].id;
@@ -71,18 +73,15 @@ function fillCarousel(element_id, list_of_movies){
         "beforeend",
         `<img class="img-${index}" slider-img" src="${cover_url}" onclick="open_details(${movie_id});" />`
       )
-    }
   }
-  // scrollPerClick = document.querySelector(".img-1").offsetWidth + ImagePadding;
-  // alert(scrollPerClick)  
 }
 
+// MODAL WINDOW-RELATED THINGIES
 var master_container = document.querySelector('.master-container')
 
 function open_details(movie_id) {
   // Create movie instance
   var movie = new Movie(movie_id)
-  console.log(movie.id)
 
   // Get the modal
   var modal = document.getElementById("myModal");
@@ -110,7 +109,7 @@ function open_details(movie_id) {
     if (event.target == modal) {
       modal.style.display = "none";
     }
-  } 
+  }
   
   modal.style.display = "block";
 }
@@ -118,5 +117,6 @@ function open_details(movie_id) {
 class Movie {
   constructor(id){
     this.id = id;
+    // /api/v1/title/${id}
   }
 }

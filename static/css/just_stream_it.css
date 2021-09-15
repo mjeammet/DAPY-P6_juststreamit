@@ -36,7 +36,7 @@ a {
 
 /* MY SHITE */
 nav {
-  height: 15vw;
+  height: 130px;
   width: 100%;
   background-color: #2d4a58;
   display: flex;
@@ -55,6 +55,7 @@ nav {
 }
 
 .best_video {
+  height: 300px;
   border: black solid 4px;
   color: black; 
   margin-bottom: 1.5rem;
@@ -65,28 +66,22 @@ nav {
 }
 
 .best_movie_img{
-  width: 40vw;
-  align-self: right;
-}
-
-.carousel_section {
-  justify-content: center;
-  align-items: center;
-  display: block;
+  height: 100%;
+  max-width: 40vw;
 }
 
 /* Carousel */
 .carousel {
   height: 250px;
-  width: 100%;
+  width: 92%;
   justify-content: center;
   align-items: center;
   position: relative;
-  display: inline-flex;
+  display: inline-block;
 }
 
 .carouselBox {
-  height: 200px;
+  height: 250px;
   width: auto;
   /* background-color: aqua; */
   overflow: hidden;
@@ -124,8 +119,8 @@ nav {
 }
 
 .carouselBox img{
-  height: 150px;
-  width: 147px;  
+  height: 200px;
+  width: 12vw;
   border: solid black 3px;
   background-size: cover;
   background-color: #2d4a58;
