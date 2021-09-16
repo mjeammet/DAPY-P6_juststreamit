@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8"/> 
         <link rel="stylesheet" href="./static/css/just_stream_it.css">
         
         <script></script>
@@ -34,11 +35,20 @@
                     <h3>Titre de la vidéo</h3>
                     <button class="play-button">Play</button>
                 </div>
-                <img class="best_movie_img" src="https://voiretmanger.fr/wp-content/uploads/2015/01/contact-jodie-foster-zemeckis.jpg" alt="">
+                <img class="best_movie_img" src="https://voiretmanger.fr/wp-content/uploads/2015/01/contact-jodie-foster-zemeckis.jpg" alt="" onclick="testfunction();">
             </div>
 
-            <div id="best_movies"class="carousel">
-                <h2>Films les mieux notés</h2>
+            <h2>Films les mieux notés</h2>
+            <div id="best_movies"class="carousel">                
+                <a class="switchLeft sliderButton"><</a>
+                <div class="carouselBox">
+                    <!-- Movies selection -->
+                </div>
+                <a class="switchRight sliderButton">></a>
+            </div>
+                
+            <h2>Meilleurs films cubains</h2>
+            <div id="cat1" class="carousel">                
                 <a class="switchLeft sliderButton" onclick="sliderScrollLeft(this);"><</a>
                 <div class="carouselBox">
                     <!-- Movies selection -->
@@ -46,18 +56,8 @@
                 <a class="switchRight sliderButton" onclick="sliderScrollRight(this);">></a>
             </div>
                 
-            <div id="cat1" class="carousel">
-                <h2>Meilleurs films cubains</h2>
-                <a class="switchLeft sliderButton" onclick="sliderScrollLeft(this);"><</a>
-                <div class="carouselBox">
-                    <!-- Movies selection -->
-                </div>
-                <a class="switchRight sliderButton" onclick="sliderScrollRight(this);">></a>
-            </div>
-                
+            <h2>Les plus gros hits de science fiction</h2>
             <div id="cat2" class="carousel">
-                <h2>Les plus gros hits de science fiction</h2>
-
                 <a class="switchLeft sliderButton" onclick="sliderScrollLeft(this);"><</a>
                 <div class="carouselBox">
                     <!-- Movies selection -->
