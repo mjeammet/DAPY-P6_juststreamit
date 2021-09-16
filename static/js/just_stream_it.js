@@ -32,8 +32,7 @@ async function updateCarousel(element_id, query_url){
   let json = await get_json_from_api(query_url);
   list_of_movies = json.results
   carousel = document.getElementById(`${element_id}`)
-  element = carousel.querySelector(".carouselBox")
-  // element.innerHTML = ""
+  
 
   // update previous and next buttons' onclick behaviours
   // TODO : disable button if json.next == null
@@ -43,37 +42,71 @@ async function updateCarousel(element_id, query_url){
   let button_next = carousel.querySelector(".switchRight");
   button_next.onclick = function() { updateCarousel(element_id, json.next);  }; 
 
-  // update cover boxes
-  let box = document.createElement("div");
-  box.className = "carouselBox";
+  // update cover boxes  
+  let cover_box = carousel.querySelector(".carouselBox");
+  cover_box.innerHTML = "";
 
   let index = 0;
   for (pic_index in list_of_movies){
       index ++;
       var cover_url = list_of_movies[pic_index].image_url;
       var movie_id = list_of_movies[pic_index].id;
-      box.insertAdjacentHTML(
+      cover_box.insertAdjacentHTML(
         "beforeend",
         `<img class="img-${index}" slider-img" src="${cover_url}" onclick="open_details(${movie_id});" />`
       )
   }
-  element.replaceChild(box, element.childNodes[1])
 }
 
 
 // MODAL WINDOW-RELATED THINGIES
 var master_container = document.querySelector('.master-container')
 
-function open_details(movie_id) {
+async function open_details(movie_id) {    
+  // Get movie infos
+  let movie_details = await get_json_from_api(api_url + movie_id)
+    .then((details) => {
+      return details
+    })
+
   // Create movie instance
-  var movie = new Movie(movie_id)
+  var movie = new Movie(movie_details)
 
   // Get the modal
   var modal = document.getElementById("myModal");
 
   // and fill it with movie infos
-  var modal_content = document.querySelector(`.modal-content`);
-  modal_content.innerHTML = `<p style='color:blue'>${movie.id}</p>`;  
+  let modal_content = document.querySelector(`.modal-content`);
+  modal_content.innerHTML = ""
+
+  let cover = document.createElement('img');
+  cover.src = movie_details.image_url
+  modal_content.appendChild(cover)
+
+
+  let info_block = document.createElement('h2');
+
+  let title = document.createElement('h2');
+  // rated can be 12
+  if (movie_details.rated == 'Not rated or unkown rating'){
+    rated = "?"
+  } else {
+    rated = movie_details.rated
+  }
+  title.innerText = `${movie_details.original_title} (R ${rated}) (${movie_details.year}) (${movie_details.id})`
+  info_block.appendChild(title)
+
+  let genre_box = document.createElement('ul');
+  genre_box.className = 'genre_box';
+  for (genre of movie_details.genres){    
+    let genre_tag = document.createElement('li');    
+    genre_tag.innerText = genre;
+    genre_box.appendChild(genre_tag);
+  }
+  info_block.appendChild(genre_box)
+
+
+  modal_content.appendChild(info_block)
 
   // Add the <span> element that closes the modal
   var span = document.createElement('span')
@@ -81,7 +114,7 @@ function open_details(movie_id) {
   span.innerHTML = '&times;'
   modal_content.appendChild(span)
 
-  console.log(modal_content)
+  // console.log(modal_content)
   modal.appendChild(modal_content);
 
   // When the user clicks on <span> (x), close the modal
@@ -100,8 +133,9 @@ function open_details(movie_id) {
 }
 
 class Movie {
-  constructor(id){
-    this.id = id;
+  constructor(movie_details){
+    this.id = movie_details.id;
+    this.title = movie_details.title;
     // /api/v1/title/${id}
   }
 }
