@@ -33,6 +33,9 @@ nav {
   margin-bottom: 1.5rem;
   display: inline-flex;
   align-items: center;
+  /* position: fixed;  */
+  top: 0;
+  z-index: 7;
 }
 
 nav a {
@@ -51,7 +54,7 @@ nav img {
 }
 
 .master-container{ 
-  width: 73%;
+  width: 60%;
   /* justify-content: center; */
   /* align-items: center;  */
   /* position: relative; */
@@ -60,11 +63,10 @@ nav img {
   /* padding-left:45px */
 }
 
-/* BEST VIDEO  */
-
-
+/* FEATURED MOVIE */
 #featuredMovie {
   height: 20vh;
+  /* margin-top: 150px; */
   border: black solid 4px;
   color: black; 
   margin-bottom: 1.5rem;
@@ -97,7 +99,7 @@ nav img {
   overflow: hidden;
 }
 
-/* Carousel */
+/* CAROUSEL */
 .carousel {
   width: 92%;
   margin: 10px;
@@ -121,7 +123,6 @@ nav img {
   padding: 40px 20px 22px 20px ;
 }
 
-/* BUTTONS  */
 .carousel .switchLeft,
 .carousel .switchRight {
   color : rgb(13, 171, 185);
@@ -146,7 +147,7 @@ nav img {
 
 .carouselBox img{
   height: 200px;
-  width: 12vw;
+  width: 10vw;
   border: solid black 3px;
   background-size: cover;
   background-color: #2d4a58;
@@ -163,26 +164,25 @@ nav img {
 
 /* THE MODAL */
  /* The Modal (background) */
- .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow:hidden; /* Enable scroll if needed */
+  width: 100%; 
+  height: 100%; 
+  overflow:hidden; 
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   z-index: 10;
 }
 
-/* Modal Content/Box */
 .modal-content {
   /* height: 500px; */
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 80%; 
   background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: 15% auto; 
   padding: 20px;
   border: 1px solid #888;  
   display: inline-block;

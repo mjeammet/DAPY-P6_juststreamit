@@ -93,7 +93,7 @@ async function open_details(movie_id) {
   let info_block = document.createElement('p');
 
   let title = document.createElement('h1');
-  title.innerText = `${movie.title} (${movie.id})`
+  title.innerText = `${movie.title}`
   info_block.appendChild(title)
   
   let primary_infos = document.createElement("h2")
