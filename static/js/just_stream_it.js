@@ -2,7 +2,8 @@ const api_url = "http://localhost:8000/api/v1/titles/";
 const url_dico = {
   'best_movies':  api_url + "?sort_by=-imdb_score",
   'cat1':  api_url + "?sort_by=-imdb_score&country=Cuba",
-  "cat2":  api_url + "?genre=sci-fi&sort_by=-votes",
+  "cat2":  api_url + "?genre=horror&sort_by=-votes",
+  "cat3": api_url + "?genre=sci-fi&sort_by=-date_published"
 };
 // get_best_movie();
 for (carousel_id of Object.keys(url_dico)){
@@ -70,7 +71,7 @@ async function open_details(movie_id) {
     })
 
   // Create movie instance
-  var movie = new Movie(movie_details)
+  // var movie = new Movie(movie_details)
 
   // Get the modal
   var modal = document.getElementById("myModal");
@@ -83,18 +84,20 @@ async function open_details(movie_id) {
   cover.src = movie_details.image_url
   modal_content.appendChild(cover)
 
+  let info_block = document.createElement('p');
 
-  let info_block = document.createElement('h2');
-
-  let title = document.createElement('h2');
-  // rated can be 12
-  if (movie_details.rated == 'Not rated or unkown rating'){
-    rated = "?"
-  } else {
-    rated = movie_details.rated
-  }
-  title.innerText = `${movie_details.original_title} (R ${rated}) (${movie_details.year}) (${movie_details.id})`
+  let title = document.createElement('h1');
+  title.innerText = `${movie_details.original_title} (${movie_details.id})`
   info_block.appendChild(title)
+  
+  let primary_infos = document.createElement("h2")
+  if (movie_details.rated == 'Not rated or unkown rating'){
+    rated = "Tous publics" // maybe just say it's unknown ?
+  } else {
+    rated = `Rated ${movie_details.rated}`
+  }
+  primary_infos.innerText = `${movie_details.year} - ${rated} - ${movie_details.duration/60>>0}h${movie_details.duration % 60}`;
+  info_block.appendChild(primary_infos)
 
   let genre_box = document.createElement('ul');
   genre_box.className = 'genre_box';
@@ -104,6 +107,14 @@ async function open_details(movie_id) {
     genre_box.appendChild(genre_tag);
   }
   info_block.appendChild(genre_box)
+
+  let modal_description = document.createElement('p');
+  if (movie_details.long_description != "No long description provided"){
+    modal_description.innerText = movie_details.long_description
+  } else {
+    modal_description.innerText = movie_details.description
+  }
+  info_block.insertAdjacentElement("beforeend", modal_description)
 
 
   modal_content.appendChild(info_block)

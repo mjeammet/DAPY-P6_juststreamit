@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
 body {
@@ -12,11 +13,23 @@ body {
   flex-wrap: wrap;
 }
 
-h2 {
+h1, h2 {
   text-align: center;
+  color: #2d4a58;
+  font-weight: bolder;
+  padding: 5px;
 }
 
-a {
+nav {
+  height: 130px;
+  width: 100%;
+  background-color: #2d4a58;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+nav a {
   color: white;
   margin: 10px;
   padding: 10px;
@@ -34,16 +47,7 @@ a {
   /* padding-left:45px */
 }
 
-/* MY SHITE */
-nav {
-  height: 130px;
-  width: 100%;
-  background-color: #2d4a58;
-  display: flex;
-  align-items: center;
-  margin-bottom: 1.5rem;
-}
-
+/* BEST VIDEO  */
 .jsi_logo img {
   height: 100%;
 }
@@ -55,7 +59,7 @@ nav {
 }
 
 .best_video {
-  height: 300px;
+  height: 40vh;
   border: black solid 4px;
   color: black; 
   margin-bottom: 1.5rem;
@@ -72,16 +76,18 @@ nav {
 
 /* Carousel */
 .carousel {
-  height: 250px;
   width: 92%;
+  margin: 10px;
   justify-content: center;
   align-items: center;
   position: relative;
   display: inline-block;
+  /* background-color:rgb(221, 210, 210); */
+  padding-top: 5px;
 }
 
 .carouselBox {
-  height: 250px;
+  /* height: 250px; */
   width: auto;
   /* background-color: aqua; */
   overflow: hidden;
@@ -89,26 +95,24 @@ nav {
   display: inline-block;
   align-items: center;
   text-align: center;
-  padding-bottom: 10px !important;
+  padding: 40px 20px 22px 20px ;
   display: flex;
 }
 
 /* BUTTONS  */
 .carousel .switchLeft,
 .carousel .switchRight {
-  color : green;
-  font-weight: bold;
-  height: 100%;
-  width: 55px ;
-  line-height: 250px;
-  /* background-color: lightgreen; */
-  font-size: 30px;
-  text-align: center;
-  top: 0;
+  color : rgb(13, 171, 185);
+  height: 16%;
+  width: 55px;
+  bottom: 30%;
   z-index: 3;
+  content:url("https://cdn3.iconfinder.com/data/icons/up-side-down/100/49_right2-512.png");
+  
 }
 
 .carousel .switchLeft {
+  transform: rotate(180deg);
   position: absolute;
   left: -50px;
 }
@@ -124,7 +128,7 @@ nav {
   border: solid black 3px;
   background-size: cover;
   background-color: #2d4a58;
-  margin: 5px 10px;
+  margin: 10px;
   cursor: pointer;
   transition: 0.5s ease;
   z-index: 2;
@@ -153,12 +157,19 @@ nav {
 
 /* Modal Content/Box */
 .modal-content {
+  height: 500px;
+  width: 90%; /* Could be more or less, depending on screen size */
   background-color: #fefefe;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  border: 1px solid #888;  
   display: inline-block;
+  display: flex;
+  justify-items: center;
+}
+
+.info_block {
+  margin: 10px;
 }
 
 /* The Close Button */
@@ -175,7 +186,6 @@ nav {
   text-decoration: none;
   cursor: pointer;
 } 
-
 
 .genre_box li{
   border-radius: 25px;

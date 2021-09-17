@@ -15,16 +15,14 @@
     <body>
         <!-- {% include './include/navbar.html' %}  -->
         <nav>
-            <a class="navbar-brand" href="#" style="width:40vw;">
-                <img src="./static/img/jsi_logo.png" alt="" width="150vw">
+            <a class="navbar-brand" href="#">
+                <img src="./static/img/jsi_logo.png" alt="" width="100vw">
             </a>
-            <div style="display: flex;">
-                <a href="#">
-                    <h2>Accueil</h2>
+            <div style="display: inline-flex; align-items: center;">
+                <a href="#"><h2>Accueil</h2></a>
+                <a href="#best_movies"><h2>Films les mieux notés</h2>
                 </a>
-                <a href="#">
-                    <h2>Catégories</h2>
-                </a>                
+                <a href="#cat1"><h2>Meilleurs films carribéens</h2></a>
             </div>            
         </nav>
 
@@ -38,8 +36,8 @@
                 <img class="best_movie_img" src="https://voiretmanger.fr/wp-content/uploads/2015/01/contact-jodie-foster-zemeckis.jpg" alt="" onclick="testfunction();">
             </div>
 
-            <h2>Films les mieux notés</h2>
-            <div id="best_movies"class="carousel">                
+            <div id="best_movies"class="carousel">
+                <h1>Films les mieux notés</h1>           
                 <a class="switchLeft sliderButton"><</a>
                 <div class="carouselBox">
                     <!-- Movies selection -->
@@ -47,32 +45,32 @@
                 <a class="switchRight sliderButton">></a>
             </div>
                 
-            <h2>Meilleurs films cubains</h2>
-            <div id="cat1" class="carousel">                
-                <a class="switchLeft sliderButton" onclick="sliderScrollLeft(this);"><</a>
+            <div id="cat1" class="carousel">
+                <h1>Meilleurs films cubains</h1>
+                <a class="switchLeft sliderButton" onclick="sliderScrollLeft(this);"></a>
                 <div class="carouselBox">
                     <!-- Movies selection -->
                 </div>
-                <a class="switchRight sliderButton" onclick="sliderScrollRight(this);">></a>
+                <a class="switchRight sliderButton" onclick="sliderScrollRight(this);"></a>
             </div>
-                
-            <h2>Les plus gros hits de science fiction</h2>
+            
             <div id="cat2" class="carousel">
-                <a class="switchLeft sliderButton" onclick="sliderScrollLeft(this);"><</a>
+                <h1>Les plus gros hits d'horreur</h1>
+                <a class="switchLeft sliderButton" onclick="sliderScrollLeft(this);"></a>
                 <div class="carouselBox">
                     <!-- Movies selection -->
                 </div>
-                <a class="switchRight sliderButton" onclick="sliderScrollRight(this);">></a>
+                <a class="switchRight sliderButton" onclick="sliderScrollRight(this);"></a>
     
             </div>
                 
             <div id="cat3" class="carousel">
-                <h2>Catégorie 3</h2>
-                <a class="switchLeft sliderButton" onclick="sliderScrollLeft(this);"><</a>
+                <h1>Dernières sorties de science fiction</h1>
+                <a class="switchLeft sliderButton" onclick="sliderScrollLeft(this);"></a>
                 <div class="carouselBox">
                     <!-- Movies selection -->
                 </div>
-                <a class="switchRight sliderButton" onclick="sliderScrollRight(this);">></a>
+                <a class="switchRight sliderButton" onclick="sliderScrollRight(this);"></a>
             </div>
             
             <!-- The Modal -->
