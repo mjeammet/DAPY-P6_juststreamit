@@ -15,29 +15,27 @@
     <body>
         <!-- {% include './include/navbar.html' %}  -->
         <nav>
-            <a class="navbar-brand" href="#">
-                <img src="./static/img/jsi_logo.png" alt="" width="100vw">
-            </a>
-            <div style="display: inline-flex; align-items: center;">
+            <a><img src="./static/img/jsi_logo.png" alt="" width="100vw"></a>
+            <ul>
                 <a href="#">Accueil</a>
-                <a href="#best_movies">Les mieux notés</a>
+                <a href="#featured_movie">Les mieux notés</a>
                 <a href="#cat1">Films cubains</a>
                 <a href="#cat2">Succès d'horreur</a>
                 <a href="#cat3">Pépites secrètes</a>
-            </div>           
+            </ul>           
         </nav>
 
         <div class="master-container">        
             <!-- Vidéo la mieux notée -->
-            <div class="best_video">
+            <div id="featuredMovie">
                 <div>
-                    <h3>Titre de la vidéo</h3>
-                    <button class="play-button">Play</button>
+                    <h1>Titre de la vidéo</h1>
+                    <button class='play'>Play</button>
                 </div>
-                <img class="best_movie_img" src="https://voiretmanger.fr/wp-content/uploads/2015/01/contact-jodie-foster-zemeckis.jpg" alt="" onclick="testfunction();">
+                <img src="" alt="featured_movie"/>
             </div>
 
-            <div id="best_movies"class="carousel">
+            <div id="best_movies" class="carousel">
                 <h1>Films les mieux notés</h1>           
                 <a class="switchLeft sliderButton"><</a>
                 <div class="carouselBox">

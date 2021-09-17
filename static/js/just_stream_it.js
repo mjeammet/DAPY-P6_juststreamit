@@ -5,7 +5,9 @@ const url_dico = {
   "cat2":  api_url + "?genre=horror&sort_by=-votes",
   "cat3": api_url + "?imdb_score_min=8&sort_by=votes"
 };
-// get_best_movie();
+// init_data();
+
+get_best_movie();
 for (carousel_id of Object.keys(url_dico)){
   updateCarousel(carousel_id, url_dico[carousel_id]);
 }
@@ -19,22 +21,26 @@ async function get_json_from_api(url) {
   return api_json;
 }
 
-// if (category_name == 'best_movies'){
-  //       featured_img = document.getElementsByClassName('best_movie_img');
-  //       console.log(featured_img);
-  //       featured_img.src = api_data[0].image_url;
-  //       console.log(api_data[0].image_url);
-  //     }
+async function get_best_movie() {
+  let json = await get_json_from_api(api_url + "?sort_by=-imdb_score");
+  selected_movie = json.results[0]
 
+  let featured_box = document.getElementById('featuredMovie')
+  let title = featured_box.childNodes[1].childNodes[1];
+  title.innerHTML = selected_movie.title
+  let play_button = title.nextElementSibling;
+  play_button.onclick = function() { open_details(selected_movie.id); }
+  let featured_cover = featured_box.childNodes[3];
+  // console.log(featured_cover);
+  featured_cover.src = selected_movie.image_url;
+}
 
 // takes carousel box element and fills it with appropriate movie
-
 async function updateCarousel(element_id, query_url){
   let json = await get_json_from_api(query_url);
   list_of_movies = json.results
   carousel = document.getElementById(`${element_id}`)
   
-
   // update previous and next buttons' onclick behaviours
   // TODO : disable button if json.next == null
   let button_previous = carousel.querySelector(".switchLeft");
@@ -58,7 +64,6 @@ async function updateCarousel(element_id, query_url){
       )
   }
 }
-
 
 // MODAL WINDOW-RELATED THINGIES
 var master_container = document.querySelector('.master-container')
@@ -112,11 +117,7 @@ async function open_details(movie_id) {
   table.innerHTML += `<tr><th>Réalisation</th><td>${movie.directors}</td></tr>`
   table.innerHTML += `<tr><th>Pays d'origine</th><td>${movie.countries}</td></tr>`
   table.innerHTML += `<tr><th>Date de sortie</th><td>${movie.date_published}</td></tr>`
-  table.innerHTML += `<tr><th rowspan=100>Featuring</th>`
-  for (actor of movie.actors){
-    table.innerHTML += `<td>${actor}</td>`
-  }
-  table.innerHTML += "</tr>"
+  table.innerHTML += `<tr><th rowspan=100>Featuring</th><td>${movie.actors}</td></tr>`
   info_block.appendChild(table);
 
   modal_content.appendChild(info_block)

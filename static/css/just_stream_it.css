@@ -1,7 +1,12 @@
 * {
   margin: 0;
   padding: 0;
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-stretch: expanded;
+}
+
+p, a, li {
+  font-size: 20px;
 }
 
 body {
@@ -25,8 +30,9 @@ nav {
   width: 100%;
   background-color: #2d4a58;
   display: flex;
-  align-items: center;
   margin-bottom: 1.5rem;
+  display: inline-flex;
+  align-items: center;
 }
 
 nav a {
@@ -35,6 +41,13 @@ nav a {
   padding: 10px;
   text-decoration: none;
   font-weight: lighter;
+  display: inline-flex;
+  align-items: center;
+}
+
+nav img {
+  height: 120%;
+  /* width: 200vw; */
 }
 
 .master-container{ 
@@ -48,42 +61,52 @@ nav a {
 }
 
 /* BEST VIDEO  */
-.jsi_logo img {
-  height: 100%;
-}
 
-.play-button {
-  background-color: red;
-  width: 8vw;
-  border-radius: 0.4rem;
-}
 
-.best_video {
-  height: 40vh;
+#featuredMovie {
+  height: 20vh;
   border: black solid 4px;
   color: black; 
   margin-bottom: 1.5rem;
   display: inline-block;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   display: flex;
 }
 
-.best_movie_img{
+#featuredMovie div{
+  height: 40%;
+  margin-left: 50px;
+  margin-right: 50px;
+  align-items: center;
+  justify-items: center;
+  display: grid;
+
+}
+
+#featuredMovie .play {
+  background-color: red;
+  width: 80%;
+  border-radius: 0.6rem;
+}
+
+#featuredMovie img{
   height: 100%;
   max-width: 40vw;
+  min-width: 10vw;
+  overflow: hidden;
 }
 
 /* Carousel */
 .carousel {
   width: 92%;
   margin: 10px;
-  justify-content: center;
   align-items: center;
   position: relative;
   display: inline-block;
   /* background-color:rgb(221, 210, 210); */
   padding-top: 5px;
+  justify-content: center;
 }
 
 .carouselBox {
@@ -96,7 +119,6 @@ nav a {
   align-items: center;
   text-align: center;
   padding: 40px 20px 22px 20px ;
-  display: flex;
 }
 
 /* BUTTONS  */
@@ -149,7 +171,7 @@ nav a {
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
+  overflow:hidden; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   z-index: 10;
@@ -157,8 +179,8 @@ nav a {
 
 /* Modal Content/Box */
 .modal-content {
-  height: 500px;
-  width: 90%; /* Could be more or less, depending on screen size */
+  /* height: 500px; */
+  width: 80%; /* Could be more or less, depending on screen size */
   background-color: #fefefe;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
@@ -169,19 +191,33 @@ nav a {
 }
 
 .modal_cover {
-  min-width: 25vw;
+  height: 90%;
+  min-width: 10vw;
+
   margin-right: 20px;
 }
 
-.info_block {
+.info_block {  
   margin: 10px;
 }
+
+table {
+  margin-top: 20px;
+  border: 3px solid black;
+  text-align: left;
+}
+
+table td, th{
+  padding: 5px;
+  border: 1px solid lightgray;
+}
+
 
 /* The Close Button */
 .close {
   color: #aaa;
   float: right;
-  font-size: 28px;
+  font-size: 40px;
   font-weight: bold;
 }
 
