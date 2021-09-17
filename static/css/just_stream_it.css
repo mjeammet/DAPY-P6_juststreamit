@@ -168,6 +168,11 @@ nav a {
   justify-items: center;
 }
 
+.modal_cover {
+  min-width: 25vw;
+  margin-right: 20px;
+}
+
 .info_block {
   margin: 10px;
 }
@@ -187,7 +192,7 @@ nav a {
   cursor: pointer;
 } 
 
-.genre_box li{
+.tag_box li{
   border-radius: 25px;
   display: inline-block;
   margin: 10px;

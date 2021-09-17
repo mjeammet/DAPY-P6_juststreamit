@@ -3,7 +3,7 @@ const url_dico = {
   'best_movies':  api_url + "?sort_by=-imdb_score",
   'cat1':  api_url + "?sort_by=-imdb_score&country=Cuba",
   "cat2":  api_url + "?genre=horror&sort_by=-votes",
-  "cat3": api_url + "?genre=sci-fi&sort_by=-date_published"
+  "cat3": api_url + "?imdb_score_min=8&sort_by=votes"
 };
 // get_best_movie();
 for (carousel_id of Object.keys(url_dico)){
@@ -71,7 +71,7 @@ async function open_details(movie_id) {
     })
 
   // Create movie instance
-  // var movie = new Movie(movie_details)
+  var movie = new Movie(movie_details)
 
   // Get the modal
   var modal = document.getElementById("myModal");
@@ -81,41 +81,43 @@ async function open_details(movie_id) {
   modal_content.innerHTML = ""
 
   let cover = document.createElement('img');
+  cover.className = "modal_cover";
   cover.src = movie_details.image_url
   modal_content.appendChild(cover)
 
   let info_block = document.createElement('p');
 
   let title = document.createElement('h1');
-  title.innerText = `${movie_details.original_title} (${movie_details.id})`
+  title.innerText = `${movie.title} (${movie.id})`
   info_block.appendChild(title)
   
   let primary_infos = document.createElement("h2")
-  if (movie_details.rated == 'Not rated or unkown rating'){
-    rated = "Tous publics" // maybe just say it's unknown ?
-  } else {
-    rated = `Rated ${movie_details.rated}`
-  }
-  primary_infos.innerText = `${movie_details.year} - ${rated} - ${movie_details.duration/60>>0}h${movie_details.duration % 60}`;
+  primary_infos.innerText = `${movie.year} - ${movie.rated} - ${movie.duration/60>>0}h${movie.duration % 60}`;
   info_block.appendChild(primary_infos)
+  
+  // tag box 
+  let tag_box = document.createElement('ul');  
+  tag_box.className = 'tag_box';
+  tag_box.innerHTML += `<li style="background-color: ${movie.score_color}">${movie.imdb_score}/10</li>`;
+  tag_box.innerHTML += `<li style="background-color: lightgray">${movie.votes} votes</li>`;
+  for (genre of movie.genres){
+    tag_box.innerHTML += `<li>${genre}</li>`
+  }  
+  info_block.appendChild(tag_box)
 
-  let genre_box = document.createElement('ul');
-  genre_box.className = 'genre_box';
-  for (genre of movie_details.genres){    
-    let genre_tag = document.createElement('li');    
-    genre_tag.innerText = genre;
-    genre_box.appendChild(genre_tag);
+  info_block.innerHTML += `<p>${movie.description}</p>`
+
+  // Technical info table
+  let table = document.createElement("table");
+  table.innerHTML += `<tr><th>Réalisation</th><td>${movie.directors}</td></tr>`
+  table.innerHTML += `<tr><th>Pays d'origine</th><td>${movie.countries}</td></tr>`
+  table.innerHTML += `<tr><th>Date de sortie</th><td>${movie.date_published}</td></tr>`
+  table.innerHTML += `<tr><th rowspan=100>Featuring</th>`
+  for (actor of movie.actors){
+    table.innerHTML += `<td>${actor}</td>`
   }
-  info_block.appendChild(genre_box)
-
-  let modal_description = document.createElement('p');
-  if (movie_details.long_description != "No long description provided"){
-    modal_description.innerText = movie_details.long_description
-  } else {
-    modal_description.innerText = movie_details.description
-  }
-  info_block.insertAdjacentElement("beforeend", modal_description)
-
+  table.innerHTML += "</tr>"
+  info_block.appendChild(table);
 
   modal_content.appendChild(info_block)
 
@@ -146,7 +148,32 @@ async function open_details(movie_id) {
 class Movie {
   constructor(movie_details){
     this.id = movie_details.id;
-    this.title = movie_details.title;
-    // /api/v1/title/${id}
+    this.title = movie_details.original_title;
+    this.year = movie_details.year;
+    if (movie_details.rated == 'Not rated or unkown rating'){
+      this.rated = "Tous publics" // maybe just say it's unknown ?
+    } else {
+      this.rated = `Rated ${movie_details.rated}`
+    }
+    this.duration = movie_details.duration;
+    this.genres = movie_details.genres;
+    if (movie_details.long_description != "No long description provided"){
+      this.description = movie_details.long_description;
+    } else {
+      this.description = movie_details.description;
+    }
+    this.directors = movie_details.directors;
+    this.countries = movie_details.countries;
+    this.date_published = movie_details.date_published;
+    this.imdb_score = movie_details.imdb_score;
+    if (this.imdb_score > 7) {
+      this.score_color = "lightgreen";
+    } else if (this.imdb_score > 4) {
+      this.score_color = 'lightgoldenrodyellow';
+    } else {
+      this.score_color = 'lightpink';
+    }
+    this.votes = movie_details.votes;
+    this.actors = movie_details.actors;
   }
 }
