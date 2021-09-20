@@ -1,15 +1,30 @@
+const movies_per_page = 7;
 const api_url = "http://localhost:8000/api/v1/titles/";
+const page_size = '&page_size=7';
 const url_dico = {
-  'best_movies':  api_url + "?sort_by=-imdb_score",
-  'cat1':  api_url + "?sort_by=-imdb_score&country=Cuba",
-  "cat2":  api_url + "?genre=horror&sort_by=-votes",
-  "cat3": api_url + "?imdb_score_min=8&sort_by=votes"
+  'best_movies':  api_url + "?sort_by=-imdb_score" + page_size,
+  'cat1':  api_url + "?sort_by=-imdb_score&country=Cuba" + page_size,
+  "cat2":  api_url + "?genre=horror&sort_by=-votes" + page_size,
+  "cat3": api_url + "?imdb_score_min=8&sort_by=votes" + page_size,
 };
-// init_data();
+initPage();
 
-get_best_movie();
-for (carousel_id of Object.keys(url_dico)){
-  updateCarousel(carousel_id, url_dico[carousel_id]);
+/**
+ * Initialize page data
+ * @param None
+ * @return None
+ */
+async function initPage(){
+  for (carousel_id of Object.keys(url_dico)){
+    let json = await get_json_from_api(url_dico[carousel_id]);
+    updateCarousel(carousel_id, json);
+
+    if (carousel_id == "best_movies"){
+      let best_movie_id = json.results[0].id
+      let best_movie_json = await get_json_from_api(api_url + best_movie_id)
+      update_best_movie(best_movie_json)
+    }
+  }
 }
 
 // CAROUSEL-RELATED FUNCTIONS 
@@ -17,37 +32,53 @@ for (carousel_id of Object.keys(url_dico)){
 // connecting to the api
 async function get_json_from_api(url) {
   let api_data = await fetch(url)
-  let api_json = await api_data.json();
-  return api_json;
+  let json = await api_data.json()
+  return json;
 }
 
-async function get_best_movie() {
-  let json = await get_json_from_api(api_url + "?sort_by=-imdb_score");
-  selected_movie = json.results[0]
-
+function update_best_movie(best_movie_json){
   let featured_box = document.getElementById('featuredMovie')
+  // featured_box.setAttribute("background-image", `url(${best_movie_json.image_url})`);
+
   let title = featured_box.childNodes[1].childNodes[1];
-  title.innerHTML = selected_movie.title
+  title.innerHTML = best_movie_json.title
   let play_button = title.nextElementSibling;
-  play_button.onclick = function() { open_details(selected_movie.id); }
+  play_button.onclick = function() { open_details(best_movie_json.id); }
+  
   let featured_cover = featured_box.childNodes[3];
   // console.log(featured_cover);
-  featured_cover.src = selected_movie.image_url;
+  featured_cover.src = best_movie_json.image_url;
 }
 
-// takes carousel box element and fills it with appropriate movie
-async function updateCarousel(element_id, query_url){
-  let json = await get_json_from_api(query_url);
+/**
+ * Update content of a carousel box element
+ * @param {String} carousel_id id of an carousel element
+ * @param {json} json json file
+ * @return None
+ */
+function updateCarousel(carousel_id, json){
+  carousel = document.getElementById(`${carousel_id}`)
   list_of_movies = json.results
-  carousel = document.getElementById(`${element_id}`)
   
-  // update previous and next buttons' onclick behaviours
-  // TODO : disable button if json.next == null
   let button_previous = carousel.querySelector(".switchLeft");
-  button_previous.onclick = function() { updateCarousel(element_id, json.previous);  }; 
+  if (json.previous != null){
+    button_previous.style.visibility = "visible";
+    get_json_from_api(json.previous).then(json_previous => {
+      button_previous.onclick = function() { updateCarousel(carousel_id, json_previous);  }; 
+    })
+  } else {
+    button_previous.style.visibility = "hidden";
+  }
 
   let button_next = carousel.querySelector(".switchRight");
-  button_next.onclick = function() { updateCarousel(element_id, json.next);  }; 
+  if (json.next != null){
+    button_next.style.visibility = "visible";
+    get_json_from_api(json.next).then(json_next => {
+      button_next.onclick = function() { updateCarousel(carousel_id, json_next);  }; 
+    })
+  } else {
+    button_next.style.visibility = "hidden";
+  }
 
   // update cover boxes  
   let cover_box = carousel.querySelector(".carouselBox");
@@ -56,11 +87,18 @@ async function updateCarousel(element_id, query_url){
   let index = 0;
   for (pic_index in list_of_movies){
       index ++;
-      var cover_url = list_of_movies[pic_index].image_url;
-      var movie_id = list_of_movies[pic_index].id;
+      let movie = list_of_movies[pic_index]
+      let movie_id = movie.id;
+      let cover; 
+      if (movie.image_url != null){
+        cover = movie.image_url;
+      } else {
+        cover = "./static/img/default_cover.jpg";
+      }
+      let title = movie.title;
       cover_box.insertAdjacentHTML(
         "beforeend",
-        `<img class="img-${index}" slider-img" src="${cover_url}" onclick="open_details(${movie_id});" />`
+        `<img class="img-${index}" slider-img" src="${cover}" alt="${title}" onclick="open_details(${movie_id});" />`
       )
   }
 }
@@ -87,7 +125,8 @@ async function open_details(movie_id) {
 
   let cover = document.createElement('img');
   cover.className = "modal_cover";
-  cover.src = movie_details.image_url
+  cover.src = movie.cover_url
+  cover.alt = movie.title
   modal_content.appendChild(cover)
 
   let info_block = document.createElement('p');
@@ -97,7 +136,7 @@ async function open_details(movie_id) {
   info_block.appendChild(title)
   
   let primary_infos = document.createElement("h2")
-  primary_infos.innerText = `${movie.year} - ${movie.rated} - ${movie.duration/60>>0}h${movie.duration % 60}`;
+  primary_infos.innerText = `${movie.year} - ${movie.rated} - ${movie.duration/60>>0}h${movie.duration % 60}min`;
   info_block.appendChild(primary_infos)
   
   // tag box 
@@ -115,8 +154,9 @@ async function open_details(movie_id) {
   // Technical info table
   let table = document.createElement("table");
   table.innerHTML += `<tr><th>Réalisation</th><td>${movie.directors}</td></tr>`
-  table.innerHTML += `<tr><th>Pays d'origine</th><td>${movie.countries}</td></tr>`
   table.innerHTML += `<tr><th>Date de sortie</th><td>${movie.date_published}</td></tr>`
+  table.innerHTML += `<tr><th>Pays d'origine</th><td>${movie.countries}</td></tr>`
+  table.innerHTML += `<tr><th>Box office</th><td>${movie.box_office}</td></tr>`  
   table.innerHTML += `<tr><th rowspan=100>Featuring</th><td>${movie.actors}</td></tr>`
   info_block.appendChild(table);
 
@@ -176,5 +216,11 @@ class Movie {
     }
     this.votes = movie_details.votes;
     this.actors = movie_details.actors;
+    if (movie_details.worldwide_gross_income != null){
+      this.box_office = movie_details.worldwide_gross_income;
+    } else {
+      this.box_office = "Not Available";
+    }
+    this.cover_url = movie_details.image_url
   }
 }

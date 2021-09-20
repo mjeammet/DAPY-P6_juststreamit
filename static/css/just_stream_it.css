@@ -12,6 +12,8 @@ p, a, li {
 body {
   height: 100vh;
   width: 100%;
+  background-color: rgb(10, 10, 10);
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,7 +22,8 @@ body {
 
 h1, h2 {
   text-align: center;
-  color: #2d4a58;
+  /* color: #2d4a58; */
+  color: white; 
   font-weight: bolder;
   padding: 5px;
 }
@@ -36,16 +39,18 @@ nav {
   /* position: fixed;  */
   top: 0;
   z-index: 7;
+  justify-content: center;
 }
 
 nav a {
   color: white;
-  margin: 10px;
+  margin: 0px 50px 0px 50px;
   padding: 10px;
   text-decoration: none;
   font-weight: lighter;
   display: inline-flex;
   align-items: center;
+  font-size: 25px;
 }
 
 nav img {
@@ -53,26 +58,26 @@ nav img {
   /* width: 200vw; */
 }
 
-.master-container{ 
+.master-container{
+  /* background-color: hotpink; */
   width: 60%;
-  /* justify-content: center; */
-  /* align-items: center;  */
-  /* position: relative; */
-  /* min-height:1px; */
-  /* padding-right: 45px; */
-  /* padding-left:45px */
+  justify-content: center;
+  align-content: center;
+  position: relative;
+  padding-right: 45px;
+  padding-left: 45px
 }
 
 /* FEATURED MOVIE */
 #featuredMovie {
-  height: 20vh;
+  height: 25vh;
   /* margin-top: 150px; */
   border: black solid 4px;
   color: black; 
   margin-bottom: 1.5rem;
   display: inline-block;
   align-items: center;
-  /* justify-content: center; */
+  justify-content: center;
   display: flex;
 }
 
@@ -82,11 +87,11 @@ nav img {
   margin-right: 50px;
   align-items: center;
   justify-items: center;
-  display: grid;
-
+  display: grid; 
 }
 
 #featuredMovie .play {
+  font-size: 20px;
   background-color: red;
   width: 80%;
   border-radius: 0.6rem;
@@ -94,44 +99,42 @@ nav img {
 
 #featuredMovie img{
   height: 100%;
-  max-width: 40vw;
+  max-width: 15vw;
   min-width: 10vw;
   overflow: hidden;
+  object-fit: cover;
 }
 
 /* CAROUSEL */
 .carousel {
-  width: 92%;
-  margin: 10px;
+  width: 100%;
   align-items: center;
   position: relative;
   display: inline-block;
   /* background-color:rgb(221, 210, 210); */
   padding-top: 5px;
-  justify-content: center;
 }
 
 .carouselBox {
   /* height: 250px; */
-  width: auto;
+  /* width: 100%; */
   /* background-color: aqua; */
-  overflow: hidden;
+  /* overflow: hidden; */
   white-space: nowrap;
   display: inline-block;
   align-items: center;
   text-align: center;
-  padding: 40px 20px 22px 20px ;
+  margin: 40px 0px 22px 0px ;
 }
 
 .carousel .switchLeft,
 .carousel .switchRight {
-  color : rgb(13, 171, 185);
-  height: 16%;
+  /* background-color : rgb(13, 171, 185); */ 
+  height: 14%;
   width: 55px;
   bottom: 30%;
   z-index: 3;
   content:url("https://cdn3.iconfinder.com/data/icons/up-side-down/100/49_right2-512.png");
-  
 }
 
 .carousel .switchLeft {
@@ -146,12 +149,12 @@ nav img {
 }
 
 .carouselBox img{
-  height: 200px;
-  width: 10vw;
+  height: 250px;
+  width: 7.2vw;
   border: solid black 3px;
   background-size: cover;
   background-color: #2d4a58;
-  margin: 10px;
+  margin: 15px;
   cursor: pointer;
   transition: 0.5s ease;
   z-index: 2;
@@ -180,20 +183,20 @@ nav img {
 
 .modal-content {
   /* height: 500px; */
-  width: 80%; 
-  background-color: #fefefe;
+  width: 62%; 
   margin: 15% auto; 
   padding: 20px;
   border: 1px solid #888;  
   display: inline-block;
   display: flex;
   justify-items: center;
+  background-color: #2d4a58;
 }
 
 .modal_cover {
   height: 90%;
-  min-width: 10vw;
-
+  min-width: 15vw;
+  max-width: 15vw;
   margin-right: 20px;
 }
 
@@ -203,7 +206,7 @@ nav img {
 
 table {
   margin-top: 20px;
-  border: 3px solid black;
+  /* border: 3px solid black; */
   text-align: left;
 }
 
