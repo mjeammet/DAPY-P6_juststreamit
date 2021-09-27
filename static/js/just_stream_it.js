@@ -1,13 +1,12 @@
 const movies_per_page = 7;
 const api_url = "http://localhost:8000/api/v1/titles/";
 const page_size = '&page_size=7';
-const url_dico = {
-  'best_movies':  api_url + "?sort_by=-imdb_score" + page_size,
-  'cat1':  api_url + "?sort_by=-imdb_score&country=Cuba" + page_size,
-  // 'cat1':  api_url + "?director=Robert+Zemeckis&sort_by=-imdb_score" + page_size,
-  "cat2":  api_url + "?genre=horror&sort_by=-votes" + page_size,
-  "cat3": api_url + "?imdb_score_min=8&sort_by=votes" + page_size,
-};
+const url_dico = [
+  {id: 'best_movies', url: api_url + "?sort_by=-imdb_score" + page_size},
+  {id: 'cat1', url: api_url + "?sort_by=-imdb_score&country=Cuba" + page_size},
+  {id: "cat2", url: api_url + "?genre=horror&sort_by=-votes" + page_size},
+  {id: "cat3", url: api_url + "?imdb_score_min=8&sort_by=votes" + page_size}
+];
 init_page();
 
 /**
@@ -16,8 +15,11 @@ init_page();
  * @return None
  */
 async function init_page(){
-  for (carousel_id of Object.keys(url_dico)){
-    let json = await get_json_from_api(url_dico[carousel_id]);
+  for (carousel of url_dico){
+    let carousel_id = carousel["id"]
+    let endpoint = carousel["url"]
+    let json = await get_json_from_api(endpoint);
+    // TODO: Create carousel here. Add titles and nav_anchors to url_dico
     update_carousel(carousel_id, json);
 
     if (carousel_id == "best_movies"){
