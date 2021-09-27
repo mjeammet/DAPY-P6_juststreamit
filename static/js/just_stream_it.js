@@ -4,20 +4,21 @@ const page_size = '&page_size=7';
 const url_dico = {
   'best_movies':  api_url + "?sort_by=-imdb_score" + page_size,
   'cat1':  api_url + "?sort_by=-imdb_score&country=Cuba" + page_size,
+  // 'cat1':  api_url + "?director=Robert+Zemeckis&sort_by=-imdb_score" + page_size,
   "cat2":  api_url + "?genre=horror&sort_by=-votes" + page_size,
   "cat3": api_url + "?imdb_score_min=8&sort_by=votes" + page_size,
 };
-initPage();
+init_page();
 
 /**
  * Initialize page data
  * @param None
  * @return None
  */
-async function initPage(){
+async function init_page(){
   for (carousel_id of Object.keys(url_dico)){
     let json = await get_json_from_api(url_dico[carousel_id]);
-    updateCarousel(carousel_id, json);
+    update_carousel(carousel_id, json);
 
     if (carousel_id == "best_movies"){
       let best_movie_id = json.results[0].id
@@ -56,7 +57,7 @@ function update_best_movie(best_movie_json){
  * @param {json} json json file
  * @return None
  */
-function updateCarousel(carousel_id, json){
+function update_carousel(carousel_id, json){
   carousel = document.getElementById(`${carousel_id}`)
   list_of_movies = json.results
   
@@ -64,7 +65,7 @@ function updateCarousel(carousel_id, json){
   if (json.previous != null){
     button_previous.style.visibility = "visible";
     get_json_from_api(json.previous).then(json_previous => {
-      button_previous.onclick = function() { updateCarousel(carousel_id, json_previous);  }; 
+      button_previous.onclick = function() { update_carousel(carousel_id, json_previous);  }; 
     })
   } else {
     button_previous.style.visibility = "hidden";
@@ -74,7 +75,7 @@ function updateCarousel(carousel_id, json){
   if (json.next != null){
     button_next.style.visibility = "visible";
     get_json_from_api(json.next).then(json_next => {
-      button_next.onclick = function() { updateCarousel(carousel_id, json_next);  }; 
+      button_next.onclick = function() { update_carousel(carousel_id, json_next);  }; 
     })
   } else {
     button_next.style.visibility = "hidden";
